@@ -13,7 +13,7 @@ Proof of concept to test how to work with idempotency
 
 ## How to run
 
-> ![WARNING]
+> [!WARNING]
 > This project uses nodejs, docker and docker-compose to run
 > You should have this tools installed in your machine
 
@@ -37,6 +37,6 @@ Proof of concept to test how to work with idempotency
     npm run dev
     ```
 
-> ![NOTE]
+> [!NOTE]
 > You should turn off the application before turn off the infrastructure at end
 > do this running `docker-compose down`
