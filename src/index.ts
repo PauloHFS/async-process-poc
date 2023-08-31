@@ -3,19 +3,19 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import { env } from './config/env.js';
 import { connectToMongoDB } from './database/mongodb.js';
-import { PipelineRouter } from './modules/pipelines/index.js';
-import { redisClient } from './services/redis.js';
+import { redisClient } from './database/redis.js';
+import { appRouter } from './router.js';
 
 const app = express();
 
-connectToMongoDB();
+await connectToMongoDB();
 
 app.use(helmet());
 app.use(morgan('dev'));
 
 app.use(express.json());
 
-app.use('/pipeline', PipelineRouter);
+app.use(appRouter);
 
 app.get('/', async (req, res) => {
   try {
