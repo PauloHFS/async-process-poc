@@ -1,7 +1,7 @@
 import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import { env } from './env.js';
+import { env } from './config/env.js';
 import { redisClient } from './services/redis.js';
 
 const app = express();
@@ -19,5 +19,5 @@ app.get('/', async (req, res) => {
 });
 
 app.listen(env.PORT, () => {
-  console.log(`Example app listening at http://localhost:${env.PORT}`);
+  console.log(`Server Running at http://localhost:${env.PORT}`);
 });
