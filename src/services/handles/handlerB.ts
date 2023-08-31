@@ -1,4 +1,4 @@
-import { randomResponseTime } from '../../utils/random-response-time.js';
+import { randomResponseTime } from '../../utils/randomResponseTime.js';
 import { Handler } from './index.js';
 
 const ERROR_RATE = 0.5; // 50% of the time, this handler will fail
