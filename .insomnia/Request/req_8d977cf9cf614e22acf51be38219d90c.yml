@@ -1,0 +1,24 @@
+_id: req_8d977cf9cf614e22acf51be38219d90c
+type: Request
+parentId: fld_e7160b4d9eca49709053d92e29189a20
+modified: 1693447941870
+created: 1693446458646
+url: "{{ _.base_url }}/pipeline/{% prompt 'Get Pipeline by ID', 'pipeline_id',
+  '', 'pipeline_id', false, true %}"
+name: Get pipeline by id
+description: ""
+method: GET
+body: {}
+parameters: []
+headers:
+  - name: User-Agent
+    value: Insomnia/2023.5.7
+authentication: {}
+metaSortKey: -1693446458646
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

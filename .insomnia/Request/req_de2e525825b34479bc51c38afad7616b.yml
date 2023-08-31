@@ -1,0 +1,35 @@
+_id: req_de2e525825b34479bc51c38afad7616b
+type: Request
+parentId: fld_e7160b4d9eca49709053d92e29189a20
+modified: 1693447572935
+created: 1693446475933
+url: "{{ _.base_url }}/pipeline"
+name: Create Pipeline
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"name": "ab-pipeline",
+    	"description": "try a before try b",
+    	"stages": [
+    		"handlerA",
+    		"handlerB"
+    	]
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: Insomnia/2023.5.7
+authentication: {}
+metaSortKey: -1693446475933
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
