@@ -13,7 +13,7 @@ Proof of concept to test how to work with idempotency
 
 ## How to run
 
-> [!WARNING]
+> [!IMPORTANT]
 > This project uses nodejs, docker and docker-compose to run
 > You should have this tools installed in your machine
 
