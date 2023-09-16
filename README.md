@@ -1,6 +1,6 @@
-# idempotency-poc
+# async-process-poc
 
-Proof of concept to test how to work with idempotency
+Proof of concept to test how to work with async and batch processing
 
 ## What I want to implement
 

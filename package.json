@@ -1,8 +1,8 @@
 {
-  "name": "idempotency-poc",
+  "name": "async-process-poc",
   "version": "1.0.0",
   "main": "src/index.ts",
-  "repository": "git@github.com:PauloHFS/idempotency-poc.git",
+  "repository": "git@github.com:PauloHFS/async-process-poc.git",
   "author": "Paulo Hernane <paulohernane10@gmail.com>",
   "license": "MS-PL",
   "type": "module",
