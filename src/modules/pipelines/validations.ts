@@ -1,5 +1,5 @@
+import { PipelineModel } from '@/database/mongodb/models/pipeline.js';
 import zod from 'zod';
-import { PipelineModel } from './models/pipeline.js';
 
 export const createPipelineSchema = zod.object({
   body: zod.object({

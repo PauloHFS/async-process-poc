@@ -1,5 +1,5 @@
+import { PipelineModel } from '@/database/mongodb/models/pipeline.js';
 import { Request, Response } from 'express';
-import { PipelineModel } from './models/pipeline.js';
 
 export const getPipelines = async (req: Request, res: Response) => {
   try {

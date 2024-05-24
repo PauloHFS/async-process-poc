@@ -2,6 +2,14 @@ export class Handler {
   slug: string;
   handler: Function;
 
+  /**
+   * Create a new handler
+   *
+   * TODO: Register handler in the database
+   *
+   * @param slug String identifier for the handler
+   * @param handler
+   */
   constructor(slug: string, handler: Function) {
     this.slug = slug;
     this.handler = handler;
