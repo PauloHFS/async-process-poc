@@ -8,9 +8,10 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "tsc --build",
+    "build": "yarn clean && tsc --build && cp -v ./.env ./build/.env",
     "start": "node ./build/index.js",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "clean": "rm -rv ./build"
   },
   "devDependencies": {
     "@types/dotenv": "^8.2.0",

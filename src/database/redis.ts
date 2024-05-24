@@ -6,13 +6,15 @@ const client = createClient({
 });
 
 client.on('connect', () => {
-  console.log('Redis Client Connected');
+  console.log('Redis Client - Connected');
 });
 
 client.on('error', err => {
-  console.error('Redis Client Error', err);
+  console.error('Redis Client - Error', err);
 });
 
-await client.connect();
+client.on('end', () => {
+  console.log('Redis Client - Disconnected');
+});
 
-export const redisClient = client;
+export { client };
