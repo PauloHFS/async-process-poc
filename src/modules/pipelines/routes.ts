@@ -1,5 +1,5 @@
+import { validateZodSchema } from '@/middlewares/validateZodSchema.js';
 import express from 'express';
-import { validateZodSchema } from '../../middlewares/validateZodSchema.js';
 import { createPipeline, getPipeline, getPipelines } from './controller.js';
 import { createPipelineSchema, getPipelineSchema } from './validations.js';
 

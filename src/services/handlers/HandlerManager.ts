@@ -1,15 +1,16 @@
-import { handlerA } from './handlerA.js';
-import { handlerB } from './handlerB.js';
-import { Handler } from './index.js';
+import { HandlerModel } from '@/database/mongodb/models/handler.js';
+import { Handler } from './Handler.js';
 
 /**
  * HandlerManager
  *
  */
 export class HandlerManager {
+  #ready: boolean;
   handlers: Map<string, Handler>;
 
   constructor() {
+    this.#ready = false;
     this.handlers = new Map();
   }
 
@@ -18,13 +19,13 @@ export class HandlerManager {
    *
    * @param handler
    */
-  async addHandler(handler: Handler) {
-    try {
-      await handler.instantiate();
-      this.handlers.set(handler.slug, handler);
-    } catch (error) {
-      console.error(`Failed to add handler: ${error}`);
-    }
+  addHandler(handler: Handler) {
+    this.handlers.set(handler.slug, handler);
+  }
+
+  async getActiveHandlers() {
+    await this.#updateHandlers();
+    return Array.from(this.handlers.values()).filter(handler => handler.active);
   }
 
   async process(pipeline: string[], data: any) {
@@ -33,7 +34,7 @@ export class HandlerManager {
     for (const slug of pipeline) {
       const handler = this.handlers.get(slug);
 
-      if (handler) {
+      if (handler && handler.active) {
         try {
           result = await handler.process(data);
           break;
@@ -45,11 +46,39 @@ export class HandlerManager {
 
     return result;
   }
+
+  async init() {
+    this.#ready = true;
+    try {
+      const promises = Array.from(this.handlers.values()).map(handler =>
+        handler.instantiate()
+      );
+      const results = await Promise.allSettled(promises);
+
+      for (const result of results) {
+        if (result.status === 'rejected') {
+          console.error(`Failed to instantiate handler: ${result.reason}`);
+        }
+      }
+    } catch (error) {
+      console.error(`Failed to instantiate handlers: ${error}`);
+    }
+  }
+
+  async #updateHandlers() {
+    try {
+      const handlersDb = await HandlerModel.find();
+
+      for (const handler of handlersDb) {
+        const handlerInstance = this.handlers.get(handler.slug);
+        if (handlerInstance) {
+          handlerInstance.active = handler.active;
+        }
+      }
+    } catch (error) {}
+  }
 }
 
 const handlerManager = new HandlerManager();
-
-handlerManager.addHandler(handlerA);
-handlerManager.addHandler(handlerB);
 
 export { handlerManager };

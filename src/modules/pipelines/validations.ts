@@ -1,23 +1,23 @@
-import { PipelineModel } from '@/database/mongodb/models/pipeline.js';
-import zod from 'zod';
+import mongoose from 'mongoose';
+import * as z from 'zod';
 
-export const createPipelineSchema = zod.object({
-  body: zod.object({
-    name: zod
+export const createPipelineSchema = z.object({
+  body: z.object({
+    name: z
       .string({
         required_error: 'Name is required',
       })
       .min(3)
       .max(255),
-    description: zod
+    description: z
       .string({
         required_error: 'Description is required',
       })
       .min(3)
       .max(255)
       .optional(),
-    stages: zod
-      .array(zod.string(), {
+    stages: z
+      .array(z.string(), {
         required_error: 'Stages is required',
       })
       .min(1)
@@ -25,20 +25,21 @@ export const createPipelineSchema = zod.object({
   }),
 });
 
-export const getPipelineSchema = zod.object({
-  params: zod.object({
-    id: zod
+export const getPipelineSchema = z.object({
+  params: z.object({
+    id: z
       .string({
         required_error: 'Id is required',
       })
-      .refine(
-        async id => {
-          const exists = await PipelineModel.exists({ _id: id });
-          return exists;
-        },
-        {
-          message: 'Pipeline not found',
+      .superRefine(async (value, ctx) => {
+        if (!mongoose.Types.ObjectId.isValid(value)) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: 'Invalid id',
+            fatal: true,
+          });
+          return z.NEVER;
         }
-      ),
+      }),
   }),
 });
