@@ -1,5 +1,6 @@
 import { Schema, model } from 'mongoose';
 
+// TODO validate if use a zod schema is a good idea here
 interface Pipeline {
   name: string;
   description: string;
