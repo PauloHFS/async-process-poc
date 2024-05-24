@@ -22,7 +22,7 @@ Proof of concept to test how to work with async and batch processing
 2. Install dependencies
 
     ```bash
-    npm install
+    yarn
     ```
 
 3. Setup de Infrastructure
@@ -34,7 +34,7 @@ Proof of concept to test how to work with async and batch processing
 4. Run the application
 
     ```bash
-    npm run dev
+    yarn dev
     ```
 
 > [!NOTE]
