@@ -1,9 +1,9 @@
+import { connectToMongoDB } from '@/database/mongodb/index.js';
+import { client } from '@/database/redis/index.js';
+import { appRouter } from '@/router.js';
 import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import { connectToMongoDB } from './database/mongodb.js';
-import { client } from './database/redis.js';
-import { appRouter } from './router.js';
 
 await connectToMongoDB();
 await client.connect();
@@ -16,7 +16,7 @@ app.use(express.json());
 
 app.use(appRouter);
 
-app.get('/', async (req, res, next) => {
+app.get('/health', async (req, res, next) => {
   const healthcheck = {
     uptime: process.uptime(),
     message: 'OK',
